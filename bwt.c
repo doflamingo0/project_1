@@ -17,8 +17,7 @@ struct rotation {
 };
 
 // Compares the rotations and sorts the rotations alphabetically
-int cmpfunc(const void* x, const void* y)
-{
+int cmpfunc(const void* x, const void* y){
 	struct rotation* rx = (struct rotation*)x;
 	struct rotation* ry = (struct rotation*)y;
 	return strcmp(rx->suffix, ry->suffix);
@@ -29,7 +28,7 @@ int* computeSuffixArray(char* text,int* sa ,int len_text, struct rotation* suff)
 	// Structure is needed to maintain old indexes of
 	// rotations after sorting them
 	int i;
-	for (i = 0; i != len_text; i++) {
+	for (i = 0; i != len_text; i++){
 		suff[i].index = i;
 		suff[i].suffix = (text + i);
 	}
@@ -205,7 +204,7 @@ void buildMinHeap(struct MinHeap* minHeap){
 // A utility function to compute huffman code of the character data
 void computeHFCode(int data,int arr[], int n){
 	int i;
-	for (i = 0; i < n; i++)
+	for (i = 0; i != n; i++)
         hf[data][i] = arr[i]+48;
 }
 
@@ -221,7 +220,7 @@ struct MinHeap* createAndBuildMinHeap(int data[], int freq[], int size){
     struct MinHeap* minHeap = createMinHeap(size);
     int i;
     int j = 0;
-	for (i = 0; i < size; ++i){
+	for (i = 0; i != size; ++i){
 		 if(freq[i] != 0) {
             minHeap->array[j] = newNode(data[i], freq[i]);
             j++;
@@ -311,7 +310,7 @@ void Encoding(FILE* input, FILE* output){
         }
         // if enough 8 bits then print it in file output
         if(cur >= 8){
-            for(j = 0; j < 8; j++){
+            for(j = 0; j != 8; j++){
                 if(encode[j] - 48 != 0)
                     c += 1 << 7-j;
                 if(j+8 < cur) encode[j] = encode[j+8];
@@ -416,16 +415,6 @@ int main(){
         double cr = (1 - 1.0*after/before)*100;
         printf(" Compression ratio = %.2lf%%\n", cr);
 
-        // print huffman codes of all number
-//        for(int i = 0; i < 95; i++){
-//            int j = 0;
-//            printf("%d: ", i);
-//            while(hf[i][j] != '\0'){
-//                printf("%c", hf[i][j]);
-//                j++;
-//            }
-//            printf("\n");
-//        }
         // Release memory
         free(suff);
         free(sa);
